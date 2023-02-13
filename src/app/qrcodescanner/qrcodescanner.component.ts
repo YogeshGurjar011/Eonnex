@@ -1,5 +1,5 @@
-import { Component ,Pipe} from '@angular/core';
-import { NgxScannerQrcodeService, ScannerQRCodeConfig, ScannerQRCodeSelectedFiles } from 'ngx-scanner-qrcode';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { BarcodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
 @Component({
   selector: 'app-qrcodescanner',
   templateUrl: './qrcodescanner.component.html',
@@ -7,28 +7,20 @@ import { NgxScannerQrcodeService, ScannerQRCodeConfig, ScannerQRCodeSelectedFile
 })
 export class QrcodescannerComponent{
 
-  public qrCodeResult: ScannerQRCodeSelectedFiles[] = [];
-
-  public config: ScannerQRCodeConfig = {
-    // fps: 100,
-    // isBeep: false,
-    // decode: 'macintosh',
-    // deviceActive: 1,
-    constraints: {
-      audio: false,
-      video: {
-        width: window.innerWidth
-      }
-    }
-  };
-
-  constructor(private qrcode: NgxScannerQrcodeService) { }
-
-  public onSelects(files: any) {
-    this.qrcode.loadFiles(files).subscribe((res: ScannerQRCodeSelectedFiles[]) => {
-      this.qrCodeResult = res;
-    });
+  constructor() {
+    this.barcode = "";
+    this.scanner = new BarcodeScannerLivestreamComponent;
   }
 
+  @ViewChild('scanner', { static: false }) scanner: BarcodeScannerLivestreamComponent;
+  barcode: string;
 
+  ngAfterViewInit() {
+    this.scanner.start();
+  }
+
+  onValueChanges(result: any) {
+    this.barcode = result.codeResult.code;
+    console.log(this.barcode)
+  }
 }
