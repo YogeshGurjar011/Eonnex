@@ -9,7 +9,7 @@ import { QrcodescannerComponent } from './qrcodescanner/qrcodescanner.component'
 import { HomeComponent } from './home/home.component';
 import { BarcodeScannerLivestreamModule } from 'ngx-barcode-scanner';
 import { ThreesixtyComponent } from './threesixty/threesixty.component';
-
+import { NgQrScannerModule } from 'angular2-qrscanner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +23,8 @@ import { ThreesixtyComponent } from './threesixty/threesixty.component';
     AppRoutingModule,
     ThreeSixtyModule,
     NgxScannerQrcodeModule,
-    BarcodeScannerLivestreamModule
+    BarcodeScannerLivestreamModule,
+    NgQrScannerModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
